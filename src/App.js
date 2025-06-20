@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
+import { 
+    getAuth, 
+    signInAnonymously, 
+    onAuthStateChanged 
+} from 'firebase/auth';
 import { 
     getFirestore, 
     collection, 
@@ -44,7 +48,7 @@ export default function App() {
 
     useEffect(() => {
         if (!isFirebaseConfigValid) {
-            setError("ERRO: A configuração do Firebase é inválida. Verifique as suas variáveis de ambiente na Netlify.");
+            setError("ERRO: A configuração do Firebase é inválida. Verifique o seu ficheiro .env ou as variáveis de ambiente na Netlify.");
             setIsLoading(false);
             return;
         }
@@ -109,7 +113,7 @@ export default function App() {
     const renderPage = () => {
         if (error) return <div className="text-center text-red-400 bg-red-900/50 p-8 rounded-lg">{error}</div>
         if (isLoading) return <LoadingSpinner />;
-
+        
         if (page === 'dashboard') {
             return isAdminAuthenticated 
                 ? <AdminDashboard allClients={clients} db={db} /> 
